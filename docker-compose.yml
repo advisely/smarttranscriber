@@ -1,0 +1,40 @@
+services:
+  transcriber:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        INSTALL_TYPE: ${INSTALL_TYPE:-network}
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/app/data
+      - ./models:/app/models
+      - ./output:/app/output
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+
+  monitoring:
+    build:
+      context: .
+      dockerfile: Dockerfile.monitoring
+    ports:
+      - "8001:8001"
+    volumes:
+      - ./data:/app/data
+    depends_on:
+      - transcriber
+    restart: unless-stopped

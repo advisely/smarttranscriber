@@ -1,0 +1,45 @@
+# Environment variables
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+ENV/
+
+# Audio files
+audio_files/*
+!audio_files/.gitkeep
+
+# Model files
+models/*
+!models/.gitkeep
+
+# Output files
+output/*
+!output/.gitkeep
+
+# Data directory
+data/*
+!data/.gitkeep
+
+# Logs
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db

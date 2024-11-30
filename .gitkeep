@@ -1,0 +1,4 @@
+touch audio_files/.gitkeep
+touch models/.gitkeep
+touch output/.gitkeep
+touch data/.gitkeep
